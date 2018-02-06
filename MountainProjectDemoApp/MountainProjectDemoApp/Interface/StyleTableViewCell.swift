@@ -27,6 +27,9 @@ class StyleTableViewCell: UITableViewCell {
     
     func configure(data: StyleTableViewData) {
         styleLabel.text = data.styleText
+        
+        detailLabel.textColor = UIColor.gray
+        detailLabel.font = UIFont.systemFont(ofSize: 12)
         detailLabel.text = data.detailText
     }
 }

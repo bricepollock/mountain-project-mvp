@@ -19,26 +19,31 @@ class UserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // table view initialization
-        
         StyleTableViewCell.register(in: tableView)
         
         // TODO: Show a spinner while this is loading
         userService.getUser(id: mountainProjectUserId) { [weak self] (user) in
+            guard let `self` = self else { return }
             guard let user = user else {
-                // TODO: show error
                 print("Unable to get error")
+                
+                DispatchQueue.main.async { [weak self] in
+                    let alertController = UIAlertController(title: "Whoops!", message: "We were unable to communicate with Mountain Project. Please try again later", preferredStyle: UIAlertControllerStyle.alert)
+                    alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: { (action) in
+                        alertController.dismiss(animated: true, completion: nil)
+                    }))
+                    self?.present(alertController, animated: true, completion: nil)
+                }
                 return
             }
             
             // do processing off main thread
-            let styleData = self?.dataProcessor.createStyleData(from: user)
+            let styleData = self.dataProcessor.createStyleData(from: user)
             
             // update UI on main thread
             DispatchQueue.main.async { [weak self] in
                 guard let `self` = self else { return }
                 self.user = user
-                
-                guard let styleData = styleData else { return }
                 self.styleData = styleData
                 self.tableView.reloadData()
             }

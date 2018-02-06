@@ -31,14 +31,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iOe-UA-gjU">
-                        <rect key="frame" x="16" y="53" width="42" height="21"/>
+                        <rect key="frame" x="16" y="45" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="iOe-UA-gjU" firstAttribute="top" secondItem="2n6-iF-1eG" secondAttribute="bottom" constant="16" id="2oM-tg-yM0"/>
+                    <constraint firstItem="iOe-UA-gjU" firstAttribute="top" secondItem="2n6-iF-1eG" secondAttribute="bottom" constant="8" id="2oM-tg-yM0"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="iOe-UA-gjU" secondAttribute="bottom" constant="16" id="4D0-EK-qns"/>
                     <constraint firstItem="2n6-iF-1eG" firstAttribute="leading" secondItem="1yT-g9-W1p" secondAttribute="leading" constant="16" id="VZN-wD-M4R"/>
                     <constraint firstItem="iOe-UA-gjU" firstAttribute="leading" secondItem="2n6-iF-1eG" secondAttribute="leading" id="cI3-80-YFo"/>

@@ -28,7 +28,7 @@ struct UserViewDataProcessor {
         } else {
             let leaderText = "Lead: \(detail.lead)"
             if !detail.follow.isEmpty {
-                return  leaderText + " " + followText
+                return  leaderText + ", " + followText
             } else {
                 return leaderText
             }
