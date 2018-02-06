@@ -18,6 +18,7 @@ struct StyleDetail: Codable {
     let follow: String
 }
 
+// TODO: Incorpoarte this for string convenience to help with type safety
 enum Style: String {
     case trad = "Trad"
     case sport = "Sport"
@@ -26,3 +27,4 @@ enum Style: String {
     case ice = "Ice"
     case mixed = "Mixed"
 }
+

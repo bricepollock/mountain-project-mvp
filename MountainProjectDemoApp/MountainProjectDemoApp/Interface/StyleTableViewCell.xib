@@ -36,10 +36,19 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wr1-XK-MFw">
+                        <rect key="frame" x="406" y="16" width="42" height="134.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="iOe-UA-gjU" firstAttribute="top" secondItem="2n6-iF-1eG" secondAttribute="bottom" constant="8" id="2oM-tg-yM0"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="iOe-UA-gjU" secondAttribute="bottom" constant="16" id="4D0-EK-qns"/>
+                    <constraint firstItem="Wr1-XK-MFw" firstAttribute="top" secondItem="1yT-g9-W1p" secondAttribute="top" constant="16" id="4g1-FU-gHV"/>
+                    <constraint firstAttribute="trailing" secondItem="Wr1-XK-MFw" secondAttribute="trailing" constant="24" id="F9d-dn-YeG"/>
+                    <constraint firstItem="Wr1-XK-MFw" firstAttribute="centerY" secondItem="1yT-g9-W1p" secondAttribute="centerY" id="M1N-Wv-0kU"/>
                     <constraint firstItem="2n6-iF-1eG" firstAttribute="leading" secondItem="1yT-g9-W1p" secondAttribute="leading" constant="16" id="VZN-wD-M4R"/>
                     <constraint firstItem="iOe-UA-gjU" firstAttribute="leading" secondItem="2n6-iF-1eG" secondAttribute="leading" id="cI3-80-YFo"/>
                     <constraint firstItem="fag-Xd-qy9" firstAttribute="centerY" secondItem="2n6-iF-1eG" secondAttribute="centerY" id="ceo-42-XEe"/>
@@ -51,6 +60,7 @@
             <connections>
                 <outlet property="detailLabel" destination="iOe-UA-gjU" id="odn-Vz-paK"/>
                 <outlet property="styleLabel" destination="fag-Xd-qy9" id="PRS-RG-okx"/>
+                <outlet property="tickCount" destination="Wr1-XK-MFw" id="BRh-Od-Jg9"/>
             </connections>
             <point key="canvasLocation" x="-76" y="91.5"/>
         </tableViewCell>

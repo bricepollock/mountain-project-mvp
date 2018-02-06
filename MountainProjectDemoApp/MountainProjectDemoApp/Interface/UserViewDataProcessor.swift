@@ -9,11 +9,12 @@
 import Foundation
 
 struct UserViewDataProcessor {
-    func createStyleData(from user: User) -> [StyleTableViewData] {
+    func createStyleData(from user: User, with ticks: TickResponse, with routeMap: [Int: Route]) -> [StyleTableViewData] {
         return user.styles.keys.flatMap { (styleKey) in
             guard let styleDetails = user.styles[styleKey] else { return nil }
             guard let styleDetailText = textFromStyleDetail(detail: styleDetails) else { return nil }
-            return StyleTableViewData(styleText: styleKey, detailText: styleDetailText)
+            let ticksForStyle = count(ticks: ticks, for: styleKey, with: routeMap)
+            return StyleTableViewData(styleText: styleKey, detailText: styleDetailText, numberOfTicks: ticksForStyle)
         }
     }
     
@@ -33,5 +34,13 @@ struct UserViewDataProcessor {
                 return leaderText
             }
         }
+    }
+    
+    func count(ticks: TickResponse, for style: String, with routeMap: [Int: Route]) -> Int {
+        let ticksInStyle = ticks.ticks.filter { (tick) -> Bool in
+            guard let routeStyle = routeMap[tick.routeId]?.type else { return false}
+            return style == routeStyle
+        }
+        return ticksInStyle.count
     }
 }

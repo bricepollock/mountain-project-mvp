@@ -12,9 +12,9 @@ class UserViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     private var user: User?
-    private let userService = UserService()
     private let dataProcessor = UserViewDataProcessor()
     private var styleData = [StyleTableViewData]()
+    internal let mountainService = MountainService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +22,8 @@ class UserViewController: UIViewController {
         StyleTableViewCell.register(in: tableView)
         
         // TODO: Show a spinner while this is loading
-        userService.getUser(id: mountainProjectUserId) { [weak self] (user) in
-            guard let `self` = self else { return }
-            guard let user = user else {
+        requestData { (user, tickResponse, routeMap) in
+            guard let user = user, let tickResponse = tickResponse else {
                 print("Unable to get error")
                 
                 DispatchQueue.main.async { [weak self] in
@@ -38,9 +37,8 @@ class UserViewController: UIViewController {
             }
             
             // do processing off main thread
-            let styleData = self.dataProcessor.createStyleData(from: user)
+            let styleData = self.dataProcessor.createStyleData(from: user, with: tickResponse, with: routeMap)
             
-            // update UI on main thread
             DispatchQueue.main.async { [weak self] in
                 guard let `self` = self else { return }
                 self.user = user

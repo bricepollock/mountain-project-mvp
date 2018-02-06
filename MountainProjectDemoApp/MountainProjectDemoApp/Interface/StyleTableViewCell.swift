@@ -12,11 +12,13 @@ import UIKit
 struct StyleTableViewData {
     let styleText: String
     let detailText: String
+    let numberOfTicks: Int
 }
 
 class StyleTableViewCell: UITableViewCell {
     @IBOutlet weak var styleLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var tickCount: UILabel!
     
     static let name = String(describing: StyleTableViewCell.self)
     
@@ -31,5 +33,9 @@ class StyleTableViewCell: UITableViewCell {
         detailLabel.textColor = UIColor.gray
         detailLabel.font = UIFont.systemFont(ofSize: 12)
         detailLabel.text = data.detailText
+        
+        tickCount.text = String(data.numberOfTicks)
+        tickCount.font = UIFont.boldSystemFont(ofSize: 20)
+        tickCount.textColor = UIColor.green
     }
 }
