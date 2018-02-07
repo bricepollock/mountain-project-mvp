@@ -12,6 +12,9 @@ class UserViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     private var user: User?
+    private var ticks: TickResponse?
+    private var routes: [Int: Route]?
+    
     private let dataProcessor = UserViewDataProcessor()
     private var styleData = [StyleTableViewData]()
     internal let mountainService = MountainService()
@@ -42,13 +45,16 @@ class UserViewController: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 guard let `self` = self else { return }
                 self.user = user
+                self.ticks = tickResponse
+                self.routes = routeMap
+                
+                self.navigationItem.title = user.name
                 self.styleData = styleData
                 self.tableView.reloadData()
             }
         }
     }
 }
-
 
 extension UserViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,8 +74,21 @@ extension UserViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        // TODO: show all ticked climbs in this category
+        defer { tableView.deselectRow(at: indexPath, animated: true) }
+        guard indexPath.row < styleData.count else {
+            print("Exceeds bounds!!")
+            return
+        }
+        
+        guard let ticks = ticks, let routes = routes else {
+            print("inadequate data")
+            return
+        }
+        
+        let style = styleData[indexPath.row].styleText
+        let ticksForStyle = dataProcessor.findTicks(for: style, given: ticks, with: routes)
+        let ticksController = TicksViewController.create(for: ticksForStyle, with: routes)
+        self.navigationController?.pushViewController(ticksController, animated: true)
     }
 }
 

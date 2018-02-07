@@ -13,6 +13,7 @@ class UserViewDataProcessorTests: XCTestCase {
     let processor = UserViewDataProcessor()
     
     let emptyTickResponse = TickResponse(ticks: [])
+    
     /// MARK - textFromStyleDetail
     
     func testTextFromStyle_empty() {

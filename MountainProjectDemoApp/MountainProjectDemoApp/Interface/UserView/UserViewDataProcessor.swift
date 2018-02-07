@@ -13,8 +13,8 @@ struct UserViewDataProcessor {
         return user.styles.keys.flatMap { (styleKey) in
             guard let styleDetails = user.styles[styleKey] else { return nil }
             guard let styleDetailText = textFromStyleDetail(detail: styleDetails) else { return nil }
-            let ticksForStyle = count(ticks: ticks, for: styleKey, with: routeMap)
-            return StyleTableViewData(styleText: styleKey, detailText: styleDetailText, numberOfTicks: ticksForStyle)
+            let ticksForStyle = findTicks(for: styleKey, given: ticks, with: routeMap)
+            return StyleTableViewData(styleText: styleKey, detailText: styleDetailText, numberOfTicks: ticksForStyle.count)
         }
     }
     
@@ -36,11 +36,10 @@ struct UserViewDataProcessor {
         }
     }
     
-    func count(ticks: TickResponse, for style: String, with routeMap: [Int: Route]) -> Int {
-        let ticksInStyle = ticks.ticks.filter { (tick) -> Bool in
+    func findTicks(for style: String, given ticks: TickResponse, with routeMap: [Int: Route]) -> [Tick] {
+        return ticks.ticks.filter { (tick) -> Bool in
             guard let routeStyle = routeMap[tick.routeId]?.type else { return false}
             return style == routeStyle
         }
-        return ticksInStyle.count
     }
 }
