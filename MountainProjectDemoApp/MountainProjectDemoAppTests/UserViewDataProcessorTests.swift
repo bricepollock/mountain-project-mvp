@@ -89,7 +89,7 @@ class UserViewDataProcessorTests: XCTestCase {
         let style = "Trad"
         let response = TickResponse(ticks: [])
         let routeMap = [Int: Route]()
-        let result = processor.count(ticks: response, for: style, with: routeMap)
+        let result = processor.findTicks(for: style, given: response, with: routeMap).count
         
         let expected = 0
         XCTAssertEqual(result, expected)
@@ -102,7 +102,7 @@ class UserViewDataProcessorTests: XCTestCase {
             ]
         )
         let routeMap = [Int: Route]()
-        let result = processor.count(ticks: response, for: style, with: routeMap)
+        let result = processor.findTicks(for: style, given: response, with: routeMap).count
         
         let expected = 0
         XCTAssertEqual(result, expected)
@@ -114,7 +114,7 @@ class UserViewDataProcessorTests: XCTestCase {
         let routeMap = [
             1 : Route(id: 1, name: "", type: style)
         ]
-        let result = processor.count(ticks: response, for: style, with: routeMap)
+        let result = processor.findTicks(for: style, given: response, with: routeMap).count
         
         let expected = 0
         XCTAssertEqual(result, expected)
@@ -130,7 +130,7 @@ class UserViewDataProcessorTests: XCTestCase {
         let routeMap = [
             routeId : Route(id: routeId, name: "", type: style)
         ]
-        let result = processor.count(ticks: response, for: style, with: routeMap)
+        let result = processor.findTicks(for: style, given: response, with: routeMap).count
         
         let expected = 1
         XCTAssertEqual(result, expected)
@@ -148,7 +148,7 @@ class UserViewDataProcessorTests: XCTestCase {
             routeId : Route(id: routeId, name: "", type: style),
             2 : Route(id: 2, name: "", type: "Sport")
         ]
-        let result = processor.count(ticks: response, for: style, with: routeMap)
+        let result = processor.findTicks(for: style, given: response, with: routeMap).count
         
         let expected = 1
         XCTAssertEqual(result, expected)
@@ -169,7 +169,7 @@ class UserViewDataProcessorTests: XCTestCase {
             2 : Route(id: 2, name: "", type: "Sport"),
             routeIdSecond : Route(id: routeIdSecond, name: "", type: style)
         ]
-        let result = processor.count(ticks: response, for: style, with: routeMap)
+        let result = processor.findTicks(for: style, given: response, with: routeMap).count
         
         let expected = 2
         XCTAssertEqual(result, expected)
